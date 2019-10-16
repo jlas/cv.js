@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <p>
+      <h1>Image Patch Rectification Demo</h1>
+    </p>
+    <p>
+      Select 4 points on the image that form a closed quadrilateral. Start at top left corner and proceed clockwise.
+    </p>
+    <div style="margin-bottom:1em">
+      <select name="image-select" id="image-select">
+        <option value="nyse.jpg">NYSE</option>
+        <option value="building.jpg">Building</option>
+        <option value="painting.jpg">Painting</option>
+      </select>
+      <input id="rectify" type="button" value="Rectify" style="display:none">
+      <input id="magnify" type="number" placeholder="magnify">
+    </div>
+    <div style="position:absolute">
+      <canvas id="source"></canvas>
+      <svg id="source-overlay" style="position:absolute;left:0">
+        <polyline points="" fill="none" stroke="greenyellow" stroke-width="3" />
+      </svg>
+      <canvas id="target" style="position:absolute;margin-left:1em"></canvas>
+    </div>
+    <div style="display:none">
+      <canvas id="source-full">
+      <img id="source-img">
+    </div>
+  </body>
+</html>
