@@ -220,7 +220,7 @@ function project(width, height) {
 
 // Handle user drop down selection
 function changeImage() {
-    image.src = "images/" + select.value;
+    image.src = "/images/" + select.value;
 }
 
 // Triggered on image load

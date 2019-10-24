@@ -8,7 +8,7 @@ let reduction = 1;
 
 // Handle user drop down selection
 function changeImage() {
-    image.src = "images/" + select.value;
+    image.src = "/images/" + select.value;
 }
 
 function filterY(imageDataData, width, height, filter) {
