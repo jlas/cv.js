@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <p>
+      <h1>Edge Detection Demo</h1>
+    </p>
+    <div style="margin-bottom:1em">
+      <select name="image-select" id="image-select">
+        <option value="nyse.jpg">NYSE</option>
+        <option value="building.jpg">Building</option>
+        <option value="painting.jpg">Painting</option>
+      </select>
+    </div>
+    <div style="position:absolute">
+      <canvas id="source"></canvas>
+      <canvas id="target" style="position:absolute;margin-left:1em"></canvas>
+    </div>
+    <div style="display:none">
+      <img id="source-img">
+    </div>
+  </body>
+</html>
