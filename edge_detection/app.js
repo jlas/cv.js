@@ -32,11 +32,17 @@ function changeAlgo() {
             algo = sobelWorker;
             break;
     }
-    requestIdleCallback(initImage);
+    requestIdleCallback(runAlgo);
+}
+
+async function runAlgo() {
+    let d = new Date();
+    await algo(sourceCtx, targetCtx);
+    algoRuntime.innerText = `Runtime: ${new Date() - d}ms`;
 }
 
 // Triggered on image load
-async function initImage() {
+function initImage() {
     let {
         width: bodyWidth,
         height: bodyHeight
@@ -57,9 +63,7 @@ async function initImage() {
     target.width = targetWidth;
     target.height = targetHeight;
 
-    let d = new Date();
-    await algo(sourceCtx, targetCtx);
-    algoRuntime.innerText = `Runtime: ${new Date() - d}ms`;
+    requestIdleCallback(runAlgo);
 }
 
 // Initialize application
