@@ -49,20 +49,25 @@ function onMessage(e) {
     if (mode === 0) {
         // X direction
         let filteredXY = filterY(data, width, height, [1, 2, 1]);
-        result = filterX(filteredXY, width, height, [1, 0, -1]);
+        result = filterX(filteredXY, width, height, [-1, 0, 1]);
     } else {
         // Y direction
         let filteredYX = filterX(data, width, height, [1, 2, 1]);
-        result = filterY(filteredYX, width, height, [1, 0, -1]);
+        result = filterY(filteredYX, width, height, [-1, 0, 1]);
     }
 
     let truncated = new Float64Array(width * height);
     for (let i = 0, j = 0; i < result.length; i += 4, j += 1) {
-        truncated[j] = Math.max(
-            Math.abs(result[i]),
-            Math.abs(result[i + 1]),
-            Math.abs(result[i + 2])
-        );
+        let r1 = Math.abs(result[i]);
+        let r2 = Math.abs(result[i + 1]);
+        let r3 = -Math.abs(result[i + 2]);
+        if (r1 > r2 && r1 > r3) {
+            truncated[j] = result[i];
+        } else if (r2 > r3) {
+            truncated[j] = result[i + 1];
+        } else {
+            truncated[j] = result[i + 2];
+        }
     }
 
     let b = truncated.buffer;
