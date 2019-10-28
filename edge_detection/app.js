@@ -47,11 +47,35 @@ function nonMaxSuppression(gradientX, gradientY, theta, width, height) {
             }
             if (flag) {
                 result[index] = xysum;
-                if (result[index] < 100) {
-                    result[index] = 0;
-                }
-            } else {
-                result[index] = 0;
+            }
+        }
+    }
+    return result;
+}
+
+function hysteresis(edgeArray, width, height) {
+    let upper = 200;
+    let lower = 100;
+    let result = new Uint8ClampedArray(width * height);
+    for (let y = 1; y < height - 1; y += 1) {
+        let yoffset = y * width;
+        for (let x = 1; x < width - 1; x += 1) {
+            let idx = yoffset + x;
+            let val = edgeArray[idx];
+            if (val > upper) {
+                result[idx] = 255;
+            } else if (
+                edgeArray[idx] > lower &&
+                (edgeArray[idx - width - 1] > upper ||
+                    edgeArray[idx - width] > upper ||
+                    edgeArray[idx - width + 1] > upper ||
+                    edgeArray[idx - 1] > upper ||
+                    edgeArray[idx + 1] > upper ||
+                    edgeArray[idx + width - 1] > upper ||
+                    edgeArray[idx + width] > upper ||
+                    edgeArray[idx + width + 1] > upper)
+            ) {
+                result[idx] = 255;
             }
         }
     }
@@ -67,6 +91,7 @@ async function canny(sourceCtx, targetCtx) {
         target.width,
         target.height
     );
+    result = hysteresis(result, target.width, target.height);
     let newImage = targetCtx.createImageData(target.width, target.height);
     for (let i = 0, j = 0; i < newImage.data.length; i += 4, j += 1) {
         newImage.data[i] = result[j];
