@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <script type="module" src="app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.6.0/math.min.js" integrity="sha512-/tJN8NvMQX+fb7OYZ/HlRn7uqev5zc+3Oa3J0ij+EI2d7bxRsJGqJD+joYL8GpmsZGFl//+2hvcpHmsVKXoG4A==" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <p>
+      <h1>LSD: A Line Segment Detector</h1>
+    </p>
+    <div style="margin-bottom:1em">
+      <label for="image-select">Image:</label>
+      <select name="image-select" id="image-select">
+        <option value="nyse.jpg">NYSE</option>
+        <option value="building.jpg">Building</option>
+        <option value="painting.jpg">Painting</option>
+      </select>
+    </div>
+    <div style="position:absolute">
+      <canvas id="source"></canvas>
+      <canvas id="target" style="position:absolute;margin-left:1em"></canvas>
+    </div>
+    <div style="display:none">
+      <img id="source-img">
+    </div>
+  </body>
+</html>
